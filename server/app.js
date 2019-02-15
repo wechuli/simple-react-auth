@@ -7,6 +7,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const env = require("dotenv").load(); //Use the .env file to load the variables
 const mainRoute = require("./routes/mainRoute");
+const cookieParser = require('cookie-parser');
 
 
 //Instantiate the express instance
@@ -19,6 +20,8 @@ app.use(cors()); //allow cors
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("dev"));
+app.use(cookieParser());
+
 app.use(passport.initialize());
 
 //Connect to Mongo DB

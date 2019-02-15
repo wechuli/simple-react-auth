@@ -10,6 +10,7 @@ class Secret extends Component {
       .get("http://localhost:8090/api/v1/secret")
       .then(response => {
         const data = response.data;
+        console.log(data);
         this.setState({
           message: data
         });
