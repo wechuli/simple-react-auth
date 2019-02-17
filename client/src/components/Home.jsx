@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 class Home extends Component {
   state = {
-    message: { message: "loading" }
+    message: "loading" 
   };
 
   componentDidMount() {
@@ -11,7 +11,7 @@ class Home extends Component {
       .then(response => {
         const data = response.data;
         this.setState({
-          message: data
+          message: data.message
         });
       })
       .catch(err => console.log(err));
@@ -23,7 +23,7 @@ class Home extends Component {
         <div className="columns">
           <div className="column is-8">
             <h1 className="title">Home</h1>
-            <p className="content">{this.state.message.message}</p>
+            <p className="content">{this.state.message}</p>
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@ router.get("/home", async (req, res) => {
     .json({ message: "Welcome to Home-This is from express server" });
 });
 
-router.get("/secret",withAuth, async (req, res) => {
+router.get("/secret", withAuth, async (req, res) => {
   res.status(200).json({ message: "The password is potato potatoes" });
 });
 
@@ -40,7 +40,7 @@ router.post("/signin", async (req, res) => {
             err
           });
         } else if (!same) {
-          res.status(401).json({ error: "Incorrect email or password" });
+          res.status(401).json({ message: "Incorrect email or password" });
         } else {
           //Issue token
           const payload = { email };
@@ -51,10 +51,14 @@ router.post("/signin", async (req, res) => {
         }
       });
     } else {
-      res.status(401).json({ error: "Incorect user or password" });
+      res.status(401).json({ message: "Incorect user or password" });
     }
   } catch (error) {
     res.status(500).json(error);
   }
+});
+
+router.get("/checkAuth", withAuth, async (req, res) => {
+  res.sendStatus(200);
 });
 module.exports = router;

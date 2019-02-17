@@ -13,14 +13,14 @@ const withAuth = function(req, res, next) {
       console.log(token);
     jwt.verify(token, process.env.SECRET_TOKEN_STRING, function(err, decoded) {
       if (err) {
-        return res.status(401).json({ error: "Unauthorized:Invalid token" });
+        return res.status(401).json({ message: "Unauthorized:Invalid token" });
       } else {
         req.email = decoded.email;
         next();
       }
     });
   } else {
-    res.status(401).json({ Error: "Unauthorized:No token provided" });
+    res.status(401).json({ message: "Unauthorized:No token provided" });
     // next();
   }
 };

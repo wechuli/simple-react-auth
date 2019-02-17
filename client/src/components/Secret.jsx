@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 class Secret extends Component {
   state = {
-    message: { message: "loading" }
+    message: "loading"
   };
 
   componentDidMount() {
@@ -15,7 +15,12 @@ class Secret extends Component {
           message: data
         });
       })
-      .catch(err => console.log(err));
+      .catch(err =>{
+        console.log(err.response);
+        this.setState({
+          message:err.response.data.message
+        })
+      });
   }
 
   render() {
@@ -24,7 +29,7 @@ class Secret extends Component {
         <div className="columns">
           <div className="column is-8">
             <h1 className="title">Secret</h1>
-            <p className="content">{this.state.message.message}</p>
+            <p className="content">{this.state.message}</p>
           </div>
         </div>
       </div>
