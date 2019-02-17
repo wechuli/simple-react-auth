@@ -5,8 +5,15 @@ class Login extends Component {
     email: "",
     password: ""
   };
-  handleFormSubmit = () => {};
-  handleInputChange = () => {};
+  handleFormSubmit = e => {
+      e.preventDefault();
+      alert('Auth coming soon');
+  };
+  handleInputChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
   render() {
     return (
       <React.Fragment>
@@ -16,9 +23,34 @@ class Login extends Component {
             <label htmlFor="email" className="label">
               Email
               <div className="control">
-              <input type="text" className="input"/>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Enter your email"
+                  onChange={this.handleInputChange}
+                  value={this.state.email}
+                  className="input"
+                  required
+                />
               </div>
             </label>
+
+            <label htmlFor="password" className="label">
+              Password
+              <div className="control">
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  onChange={this.handleInputChange}
+                  value={this.state.password}
+                  className="input"
+                  required
+                />
+              </div>
+            </label>
+            <button className="button is-primary is-outlined">Log In</button>
           </form>
         </div>
       </React.Fragment>
