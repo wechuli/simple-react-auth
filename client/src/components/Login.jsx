@@ -6,8 +6,28 @@ class Login extends Component {
     password: ""
   };
   handleFormSubmit = e => {
-      e.preventDefault();
-      alert('Auth coming soon');
+    e.preventDefault();
+    fetch("http://127.0.0.1:8090/api/v1/signin", {
+      method: "POST",
+      body: JSON.stringify(this.state),
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => {
+        if (res.status === 200) {
+          console.log(res)
+          this.props.history.push("/");
+        } else {
+          const error = new Error(res.error);
+          throw Error;
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Error logging in please try again");
+      });
   };
   handleInputChange = e => {
     this.setState({
