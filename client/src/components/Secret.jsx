@@ -6,6 +6,7 @@ class Secret extends Component {
   };
 
   componentDidMount() {
+    axios.defaults.withCredentials = true;
     axios
       .get("http://localhost:8090/api/v1/secret")
       .then(response => {
@@ -16,10 +17,11 @@ class Secret extends Component {
         });
       })
       .catch(err =>{
-        console.log(err.response);
-        this.setState({
-          message:err.response.data.message
-        })
+        // console.log(err.response);
+        // this.setState({
+        //   message:err.response.data.message
+        // })
+        console.log(err);
       });
   }
 

@@ -1,21 +1,18 @@
 import React, { Component } from "react";
 import axios from "axios";
-class Home extends Component {
+class Secret2 extends Component {
   state = {
-    message: "loading" 
+    message: "loading"
   };
 
   componentDidMount() {
-    
-    axios
-      .get("http://localhost:8090/api/v1/home")
-      .then(response => {
-        const data = response.data;
+    fetch("http://localhost:8090/api/v1/secret", { credentials: "include" })
+      .then(res => res.json())
+      .then(resjson =>
         this.setState({
-          message: data.message
-        });
-      })
-      .catch(err => console.log(err));
+          message: resjson.message
+        })
+      );
   }
 
   render() {
@@ -23,7 +20,7 @@ class Home extends Component {
       <div className="container">
         <div className="columns">
           <div className="column is-8">
-            <h1 className="title">Home</h1>
+            <h1 className="title">Secret</h1>
             <p className="content">{this.state.message}</p>
           </div>
         </div>
@@ -32,4 +29,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Secret2;

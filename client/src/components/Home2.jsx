@@ -1,21 +1,16 @@
 import React, { Component } from "react";
 import axios from "axios";
-class Home extends Component {
+class Home2 extends Component {
   state = {
-    message: "loading" 
+    message: "loading"
   };
 
   componentDidMount() {
-    
-    axios
-      .get("http://localhost:8090/api/v1/home")
-      .then(response => {
-        const data = response.data;
-        this.setState({
-          message: data.message
-        });
-      })
-      .catch(err => console.log(err));
+    fetch("http://localhost:8090/api/v1/home")
+      .then(res => res.json())
+      .then(resjson => this.setState({
+          message:resjson.message
+      }));
   }
 
   render() {
@@ -32,4 +27,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Home2;

@@ -1,24 +1,56 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-class Login extends Component {
+class Login2 extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    error:''
   };
   handleFormSubmit = e => {
     e.preventDefault();
+
+    // axios
+    //   .post("http://127.0.0.1:8090/api/v1/signin", this.state)
+    //   .then(response => console.log(response))
+    //   .catch(error => console.log(error));
+
+
+      fetch('http://127.0.0.1:8090/api/v1/signin', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password,
+        }),
+      }).then(res => {
+        console.log(res.headers.get('set-cookie')); // undefined
+        console.log(document.cookie); // nope
+        return res.json();
+      }).then(json => {
+        if (json.success) {
+          this.setState({ error: '' });
+        //   this.context.router.push(json.redirect);
+        }
+        else {
+          this.setState({ error: json.error });
+        }
+      });
+
     // fetch("http://127.0.0.1:8090/api/v1/signin", {
     //   method: "POST",
     //   body: JSON.stringify(this.state),
-    //   // credentials: "same-origin",
+    //   credentials: "same-origin",
     //   headers: {
     //     "Content-Type": "application/json"
     //   }
     // })
     //   .then(res => {
     //     if (res.status === 200) {
-    //       console.log(res)
+    //       console.log(res);
     //       this.props.history.push("/");
     //     } else {
     //       const error = new Error(res.error);
@@ -29,26 +61,6 @@ class Login extends Component {
     //     console.error(err);
     //     alert("Error logging in please try again");
     //   });
-
-    fetch("http://127.0.0.1:8090/api/v1/signin", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      credentials: "same-origin",
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password
-      })
-    })
-      .then(res => {
-        console.log(res)
-        console.log(res.headers.get("set-cookie")); // undefined
-        console.log(document.cookie); // nope
-        // return res.json();
-      })
-      .then(json => console.log(json));
   };
   handleInputChange = e => {
     this.setState({
@@ -99,4 +111,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Login2;
