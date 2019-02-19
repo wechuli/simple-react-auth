@@ -8,12 +8,12 @@ class Secret extends Component {
   componentDidMount() {
     axios.defaults.withCredentials = true;
     axios
-      .get("http://localhost:8090/api/v1/secret")
+      .get("http://127.0.0.1:8090/api/v1/secret")
       .then(response => {
         const data = response.data;
         console.log(data);
         this.setState({
-          message: data
+          message: data.message
         });
       })
       .catch(err =>{

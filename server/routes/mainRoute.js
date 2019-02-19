@@ -47,6 +47,7 @@ router.post("/signin", async (req, res) => {
           const token = jwt.sign(payload, process.env.SECRET_TOKEN_STRING, {
             expiresIn: "1h"
           });
+         
           res.cookie("token", token, { httpOnly: true }).sendStatus(200);
         }
       });

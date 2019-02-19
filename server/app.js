@@ -16,7 +16,10 @@ const app = express();
 
 //Middleware
 app.use(helmet()); //lets start by adding some basic security
-app.use(cors()); //allow cors
+app.use(cors({
+  origin:'http://localhost:3000',
+  credentials:true
+})); //allow cors
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("dev"));

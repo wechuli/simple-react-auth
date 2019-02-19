@@ -8,47 +8,15 @@ class Login extends Component {
   };
   handleFormSubmit = e => {
     e.preventDefault();
-    // fetch("http://127.0.0.1:8090/api/v1/signin", {
-    //   method: "POST",
-    //   body: JSON.stringify(this.state),
-    //   // credentials: "same-origin",
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   }
-    // })
-    //   .then(res => {
-    //     if (res.status === 200) {
-    //       console.log(res)
-    //       this.props.history.push("/");
-    //     } else {
-    //       const error = new Error(res.error);
-    //       throw Error;
-    //     }
-    //   })
-    //   .catch(err => {
-    //     console.error(err);
-    //     alert("Error logging in please try again");
-    //   });
-
-    fetch("http://127.0.0.1:8090/api/v1/signin", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      credentials: "same-origin",
-      body: JSON.stringify({
+    axios
+      .post("http://127.0.0.1:8090/api/v1/signin", {
         email: this.state.email,
-        password: this.state.password
+        password: this.state.password,
+        withCredentials:true,
+        headers: { crossDomain: true, 'Content-Type': 'application/json' }
       })
-    })
-      .then(res => {
-        console.log(res)
-        console.log(res.headers.get("set-cookie")); // undefined
-        console.log(document.cookie); // nope
-        // return res.json();
-      })
-      .then(json => console.log(json));
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
   };
   handleInputChange = e => {
     this.setState({

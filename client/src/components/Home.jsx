@@ -6,9 +6,9 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    
+
     axios
-      .get("http://localhost:8090/api/v1/home")
+      .get("http://127.0.0.1:8090/api/v1/home")
       .then(response => {
         const data = response.data;
         this.setState({
