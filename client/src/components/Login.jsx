@@ -16,6 +16,7 @@ class Login extends Component {
         headers: { crossDomain: true, 'Content-Type': 'application/json' }
       })
       .then(res => {
+        console.log(res);
         if(res.status === 200){
           this.props.history.push('/');
         }

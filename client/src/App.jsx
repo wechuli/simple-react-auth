@@ -25,7 +25,8 @@ class App extends Component {
         
 
         <Switch>
-          <Route exact path="/secret" component={WithAuth(Secret)} />
+          {/* <Route exact path="/secret" component={WithAuth(Secret)} /> */}
+          <Route exact path="/secret" component={Secret} />
 
           <Route exact path="/login" component={Login} />
 

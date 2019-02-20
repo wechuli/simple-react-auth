@@ -11,9 +11,7 @@ const WithAuth = Custom => {
     componentDidMount() {
       axios.defaults.withCredentials = true;
       axios
-        .get("http://127.0.0.1:8090/api/v1/checkAuth", {
-          withCredentials: true
-        })
+        .get("http://127.0.0.1:8090/api/v1/checkAuth")
         .then(res => {
           if (res.status === 200) {
             console.log(res)
