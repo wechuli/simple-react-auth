@@ -3,6 +3,7 @@ import Home from "./components/Home";
 import { Link, Route, Switch } from "react-router-dom";
 import Secret from "./components/Secret";
 import Login from "./components/Login";
+import WithAuth from "./hoc/WithAuth";
 
 class App extends Component {
   render() {
@@ -21,9 +22,10 @@ class App extends Component {
             </div>
           </div>
         </div>
+        
 
         <Switch>
-          <Route exact path="/secret" component={Secret} />
+          <Route exact path="/secret" component={WithAuth(Secret)} />
 
           <Route exact path="/login" component={Login} />
 

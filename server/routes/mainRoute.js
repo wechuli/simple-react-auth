@@ -13,6 +13,8 @@ router.get("/home", async (req, res) => {
 });
 
 router.get("/secret", withAuth, async (req, res) => {
+  console.log(req.email);
+  console.log(req.user);
   res.status(200).json({ message: "The password is potato potatoes" });
 });
 
@@ -47,7 +49,7 @@ router.post("/signin", async (req, res) => {
           const token = jwt.sign(payload, process.env.SECRET_TOKEN_STRING, {
             expiresIn: "1h"
           });
-         
+
           res.cookie("token", token, { httpOnly: true }).sendStatus(200);
         }
       });

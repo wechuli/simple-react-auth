@@ -15,8 +15,12 @@ class Login extends Component {
         withCredentials:true,
         headers: { crossDomain: true, 'Content-Type': 'application/json' }
       })
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+      .then(res => {
+        if(res.status === 200){
+          this.props.history.push('/');
+        }
+      })
+      .catch(err => console.log('err', err));
   };
   handleInputChange = e => {
     this.setState({
